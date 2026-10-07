@@ -1,0 +1,31 @@
+.site {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  transition: background .35s ease, color .35s ease;
+}
+.ambient {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(110px);
+  opacity: .16;
+}
+.ambient-one {
+  width: 480px;
+  height: 480px;
+  top: 2%;
+  right: -220px;
+  background: var(--text);
+  opacity: .04;
+}
+.ambient-two {
+  width: 400px;
+  height: 400px;
+  bottom: 12%;
+  left: -220px;
+  background: var(--text);
+  opacity: .025;
+}

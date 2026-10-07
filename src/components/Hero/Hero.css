@@ -1,0 +1,115 @@
+.hero {
+  position: relative;
+  min-height: 82svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 70px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+}
+.hero-eyebrow,
+.hero-scroll {
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .18em;
+}
+.hero-eyebrow {
+  margin: 0 0 28px;
+}
+.hero-title {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(48px, 6vw, 78px);
+  font-weight: 400;
+  line-height: .94;
+  letter-spacing: -.065em;
+}
+.hero-title-line {
+  display: block;
+  overflow: hidden;
+}
+.hero-title-line:last-child {
+  color: var(--text-soft);
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
+}
+.primary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 11px;
+  text-decoration: none;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: background .3s ease, transform .3s ease, border-color .3s ease;
+}
+.primary-action:hover {
+  background: var(--surface-hover);
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+.secondary-action {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-decoration: none;
+  transition: color .3s ease;
+}
+.secondary-action:hover {
+  color: var(--text);
+}
+.hero-object {
+  position: absolute;
+  z-index: 1;
+  width: min(40vw, 560px);
+  aspect-ratio: 1;
+  right: -12%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid var(--border-soft);
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, rgba(128,128,128,.12), transparent 13%), radial-gradient(circle at 50% 45%, rgba(128,128,128,.06), transparent 34%), var(--surface);
+  box-shadow: inset -70px -55px 140px rgba(0,0,0,.18), inset 25px 20px 70px rgba(255,255,255,.03), 0 80px 180px var(--shadow);
+}
+.hero-scroll {
+  position: absolute;
+  z-index: 3;
+  left: 24px;
+  bottom: 34px;
+}
+@media (max-width: 760px) {
+  .hero {
+    padding: 110px 22px 60px;
+  }
+  .hero-title {
+    font-size: clamp(44px, 12vw, 62px);
+  }
+  .hero-actions {
+    margin-top: 34px;
+  }
+  .hero-object {
+    width: 90vw;
+    right: -52%;
+    top: 65%;
+    opacity: .4;
+  }
+  .hero-scroll {
+    display: none;
+  }
+}

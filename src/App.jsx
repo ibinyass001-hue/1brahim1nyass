@@ -1,0 +1,24 @@
+import Navbar from './components/Navbar/Navbar'
+import Hero from './components/Hero/Hero'
+import Work from './components/Work/Work'
+import About from './components/About/About'
+import Contact from './components/Contact/Contact'
+import Footer from './components/Footer/Footer'
+import './App.css'
+
+function App() {
+  return (
+    <main className="site">
+      <div className="ambient ambient-one" />
+      <div className="ambient ambient-two" />
+      <Navbar />
+      <Hero />
+      <Work />
+      <About />
+      <Contact />
+      <Footer />
+    </main>
+  )
+}
+
+export default App
