@@ -20,16 +20,16 @@
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
-    --bg: #f5f4f0;
-    --text: #171717;
-    --text-soft: rgba(23,23,23,.58);
-    --text-muted: rgba(23,23,23,.34);
-    --text-faint: rgba(23,23,23,.2);
-    --border: rgba(23,23,23,.1);
-    --border-soft: rgba(23,23,23,.06);
-    --surface: rgba(255,255,255,.58);
-    --surface-hover: rgba(255,255,255,.8);
-    --shadow: rgba(0,0,0,.08);
+    --bg: #f7f6f2;
+    --text: #111111;
+    --text-soft: rgba(17,17,17,.68);
+    --text-muted: rgba(17,17,17,.48);
+    --text-faint: rgba(17,17,17,.34);
+    --border: rgba(17,17,17,.16);
+    --border-soft: rgba(17,17,17,.1);
+    --surface: rgba(255,255,255,.72);
+    --surface-hover: rgba(255,255,255,.94);
+    --shadow: rgba(17,17,17,.1);
   }
 }
 
