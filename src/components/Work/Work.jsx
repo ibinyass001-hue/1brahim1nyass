@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import {
   ArrowUpRight,
   BrainCircuit,
@@ -6,313 +6,164 @@ import {
   Leaf,
   Trophy,
   Wallet,
-  X,
 } from 'lucide-react'
 import gsap from 'gsap'
 import './Work.css'
-
-const disciplines = [
-  'DESIGN',
-  'PRODUCT',
-  'BUILD',
-  'ENGINEERING',
-  'SYSTEMS',
-  'IDEAS',
-]
 
 const projects = [
   {
     name: 'Pay4LO',
     type: 'Fintech',
+    description: 'Everyday payments, travel, and smarter money experiences.',
     url: 'https://fourontpay.onrender.com',
     icon: Wallet,
     slug: 'pay4lo',
+    number: '01',
+    discipline: 'FINANCIAL TECHNOLOGY',
   },
   {
     name: 'Nexa',
     type: 'Student Platform',
+    description: 'A connected digital experience built around student life.',
     url: 'https://nexa-app-if5e.onrender.com',
     icon: GraduationCap,
     slug: 'nexa',
+    number: '02',
+    discipline: 'EDUCATION',
   },
   {
     name: 'LiFix',
     type: 'Lifestyle Platform',
+    description: 'Convenient access to everyday services in one place.',
     url: 'https://lifix-app.onrender.com',
     icon: Leaf,
     slug: 'lifix',
+    number: '03',
+    discipline: 'LIFESTYLE',
   },
   {
     name: 'RizIQ',
     type: 'Quiz Platform',
+    description: 'A quiz and competition experience designed for learning.',
     url: 'https://riziq-app.onrender.com',
     icon: Trophy,
     slug: 'riziq',
+    number: '04',
+    discipline: 'LEARNING & PLAY',
   },
   {
     name: 'Nova',
     type: 'AI Assistant',
+    description: 'A conversational assistant concept for more intuitive workflows.',
     url: '#contact',
     icon: BrainCircuit,
     slug: 'nova',
+    number: '05',
+    discipline: 'ARTIFICIAL INTELLIGENCE',
   },
 ]
 
 function Work() {
-  const [open, setOpen] = useState(false)
   const workRef = useRef(null)
-  const panelRef = useRef(null)
 
   useLayoutEffect(() => {
     const context = gsap.context(() => {
-      const labels = gsap.utils.toArray('.orbit-label')
-      const radius = 155
-      const state = { angle: 0 }
-
-      const renderOrbit = () => {
-        labels.forEach((label, index) => {
-          const angle =
-            state.angle + index * (Math.PI * 2 / labels.length)
-          const x = Math.sin(angle) * radius
-          const y = -Math.cos(angle) * radius
-          const depth = (Math.cos(angle) + 1) / 2
-
-          gsap.set(label, {
-            x,
-            y,
-            scale: 0.82 + depth * 0.18,
-            opacity: 0.18 + depth * 0.55,
-            zIndex: Math.round(depth * 10),
-          })
-        })
-
-        gsap.set('.orbit-light', {
-          x: Math.sin(state.angle) * 170,
-          y: -Math.cos(state.angle) * 170,
-          opacity: 0.3 + ((Math.cos(state.angle) + 1) / 2) * 0.55,
-        })
-      }
-
-      renderOrbit()
-
-      const orbit = gsap.to(state, {
-        angle: Math.PI * 2,
-        duration: 42,
-        ease: 'none',
-        repeat: -1,
-        onUpdate: renderOrbit,
-      })
-
-      gsap.from('.orbit-center', {
-        scale: 0.94,
+      gsap.from('.work-kicker, .work-intro', {
+        y: 22,
         opacity: 0,
-        duration: 1.1,
+        duration: 0.8,
+        stagger: 0.12,
         ease: 'power3.out',
+        scrollTrigger: undefined,
+        immediateRender: false,
       })
 
-      gsap.to('.orbit-center', {
-        boxShadow:
-          'inset 0 1px 0 rgba(255,255,255,.07), 0 25px 80px rgba(255,255,255,.06)',
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
+      gsap.from('.project-tile', {
+        y: 28,
+        opacity: 0,
+        duration: 0.75,
+        stagger: 0.1,
+        ease: 'power3.out',
+        delay: 0.12,
+        clearProps: 'transform',
       })
-
-      return () => orbit.kill()
     }, workRef)
 
     return () => context.revert()
   }, [])
 
-  useLayoutEffect(() => {
-    if (!open || !panelRef.current) return
-
-    const context = gsap.context(() => {
-      const lid = panelRef.current.querySelector('.glass-lid')
-      const cards = panelRef.current.querySelectorAll('.work-modal-card')
-
-      gsap.fromTo(
-        '.work-panel',
-        { y: 18, scale: 0.97, opacity: 0 },
-        {
-          y: 0,
-          scale: 1,
-          opacity: 1,
-          duration: 0.45,
-          ease: 'power3.out',
-        }
-      )
-
-      gsap.fromTo(
-        lid,
-        { rotationX: 0 },
-        {
-          rotationX: -68,
-          duration: 0.9,
-          delay: 0.25,
-          ease: 'power3.inOut',
-          transformOrigin: 'top center',
-        }
-      )
-
-      gsap.fromTo(
-        cards,
-        {
-          y: -280,
-          rotationX: -45,
-          rotationZ: (index) => index % 2 === 0 ? -16 : 18,
-          scale: 0.72,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          rotationX: 0,
-          rotationZ: 0,
-          scale: 1,
-          opacity: 1,
-          duration: 1.7,
-          stagger: 0.28,
-          delay: 0.55,
-          ease: 'bounce.out',
-          clearProps: 'transform',
-        }
-      )
-    }, panelRef)
-
-    return () => context.revert()
-  }, [open])
-
   return (
     <section ref={workRef} id="work" className="work-section">
-      <div className="work-layout">
-        <div className="work-orbit">
-          <div className="orbit-ring orbit-ring-outer" />
-          <div className="orbit-ring orbit-ring-inner" />
-
-          <div className="orbit-labels">
-            {disciplines.map((discipline) => (
-              <span key={discipline} className="orbit-label">
-                {discipline}
-              </span>
-            ))}
-            <i className="orbit-light" />
+      <div className="work-inner">
+        <div className="work-heading">
+          <div className="work-intro">
+            <span className="work-kicker">
+              <span className="work-kicker-dot" />
+              01 / SELECTED WORK
+            </span>
+            <h2>Things I've <span>built.</span></h2>
+            <p>
+              A selection of products and ideas shaped through design,
+              engineering, and a lot of curiosity.
+            </p>
           </div>
 
-          <div className="orbit-center">
-            <span>HOW I</span>
-            <strong>WORK</strong>
-          </div>
+          <span className="work-count">
+            <strong>05</strong>
+            <span>PROJECTS<br />AND COUNTING</span>
+          </span>
         </div>
 
-        <div className="work-content">
-          <span className="work-kicker">01 — SELECTED WORK</span>
+        <div className="project-grid">
+          {projects.map((project) => {
+            const ProjectIcon = project.icon
+            const external = project.url.startsWith('http')
 
-          <div className="work-heading-row">
-            <h2>PROJECTS.</h2>
-            <button
-              className="view-all"
-              type="button"
-              aria-expanded={open}
-              aria-controls="project-glass-case"
-              onClick={() => setOpen((value) => !value)}
-            >
-              {open ? 'Close case' : 'View all'}
-              {open
-                ? <X size={13} strokeWidth={1.4} />
-                : <ArrowUpRight size={13} strokeWidth={1.4} />}
-            </button>
-          </div>
-
-          {open && (
-            <div
-              ref={panelRef}
-              id="project-glass-case"
-              className="work-panel"
-            >
-              <div className="work-panel-head">
-                <div>
-                  <span className="case-eyebrow">COLLECTION / 001</span>
-                  <strong>MY PROJECTS</strong>
-                </div>
-                <button
-                  className="work-close"
-                  type="button"
-                  aria-label="Close projects"
-                  onClick={() => setOpen(false)}
-                >
-                  <X size={15} strokeWidth={1.4} />
-                </button>
-              </div>
-
-              <div className="glass-case">
-                <div className="glass-lid">
-                  <span>SELECTED DIGITAL WORKS</span>
-                  <i />
+            return (
+              <a
+                key={project.slug}
+                className={`project-tile project-tile--${project.slug}`}
+                href={project.url}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noreferrer' : undefined}
+                aria-label={`Explore ${project.name}, ${project.type}`}
+              >
+                <div className="project-tile-top">
+                  <span className="project-number">{project.number}</span>
+                  <span className="project-discipline">{project.discipline}</span>
+                  <span className="project-open">
+                    <ArrowUpRight size={17} strokeWidth={1.6} />
+                  </span>
                 </div>
 
-                <div className="glass-chamber">
-                  <div className="glass-reflection" />
-
-                  <div className="work-modal-grid">
-                    {projects.map((project, index) => {
-                      const ProjectIcon = project.icon
-
-                      return (
-                        <a
-                          key={project.name}
-                          className={`work-modal-card project-card--${project.slug}`}
-                          href={project.url}
-                          target={
-                            project.url.startsWith('http')
-                              ? '_blank'
-                              : undefined
-                          }
-                          rel={
-                            project.url.startsWith('http')
-                              ? 'noreferrer'
-                              : undefined
-                          }
-                          aria-label={`View ${project.name} — ${project.type}`}
-                        >
-                          <span className="project-index">
-                            0{index + 1}
-                          </span>
-                          <ArrowUpRight
-                            className="project-arrow"
-                            size={13}
-                            strokeWidth={1.4}
-                          />
-                          <ProjectIcon
-                            className="project-icon"
-                            size={25}
-                            strokeWidth={1.5}
-                          />
-                          <div className="project-card-content">
-                            <strong>{project.name}</strong>
-                            <small>{project.type}</small>
-                          </div>
-                          <span className="project-card-shine" />
-                        </a>
-                      )
-                    })}
+                <div className="project-art">
+                  <div className="project-art-orbit project-art-orbit--outer" />
+                  <div className="project-art-orbit project-art-orbit--inner" />
+                  <div className="project-art-glow" />
+                  <div className="project-art-icon">
+                    <ProjectIcon size={38} strokeWidth={1.35} />
                   </div>
-
-                  <div className="glass-floor" />
+                  <span className="project-art-wordmark">{project.name}</span>
                 </div>
 
-                <div className="glass-base">
-                  <span>II</span>
-                  <span>FIVE PROJECTS · ONE VISION</span>
-                  <span>2026</span>
+                <div className="project-tile-bottom">
+                  <div>
+                    <h3>{project.name}</h3>
+                    <span className="project-type">{project.type}</span>
+                  </div>
+                  <p>{project.description}</p>
                 </div>
-              </div>
+              </a>
+            )
+          })}
+        </div>
 
-              <p className="case-caption">
-                A collection of things imagined, designed and built.
-              </p>
-            </div>
-          )}
+        <div className="work-footer">
+          <span>DESIGNED WITH INTENTION. BUILT TO BE USEFUL.</span>
+          <a href="#contact">
+            Have a project in mind?
+            <ArrowUpRight size={14} />
+          </a>
         </div>
       </div>
     </section>

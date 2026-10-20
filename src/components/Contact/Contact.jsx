@@ -40,7 +40,7 @@ function Contact() {
       <div className="contact-card">
         <div className="contact-top">
           <span>GET IN TOUCH</span>
-          <span className="contact-status"><i /> AVAILABLE FOR RELETED WORK</span>
+          <span className="contact-status"><i /> OPEN TO THOUGHTFUL COLLABORATIONS</span>
         </div>
         <div className="contact-main">
           <h2>Have something<br />worth building?</h2>
