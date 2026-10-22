@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import { ArrowDown, ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
-import heroImage from '../../assets/hero-transparent.png'
+import heroImage from '../../assets/hero-new.png'
 import './Hero.css'
 
 function Hero() {
