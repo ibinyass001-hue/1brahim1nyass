@@ -8,8 +8,8 @@ function Navbar() {
 
   return (
     <nav className="nav">
-      <a className="brand" href="/" aria-label="Muhammed Ibrahim Inyass home" onClick={closeMenu}>
-        <span>M. IBRAHIM</span>
+      <a className="brand" href="/" aria-label="Ibrahim Inyass home" onClick={closeMenu}>
+        <span>IBRAHIM</span>
         <span>INYASS</span>
       </a>
       <div className={`nav-links ${menuOpen ? 'nav-links-open' : ''}`}>
