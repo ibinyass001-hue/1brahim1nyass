@@ -509,8 +509,7 @@
   }
 }
 
-
-/* FINAL HERO STACKED LAYOUT */
+/* RESPONSIVE HERO LAYOUT */
 .hero-main {
   display: flex;
   flex-direction: column;
@@ -518,12 +517,13 @@
   justify-content: flex-start;
   gap: clamp(20px, 3vh, 34px);
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .hero-portrait {
   order: -1;
+  flex: 0 1 auto;
   align-self: center;
   width: min(100%, 390px);
   max-width: 390px;
@@ -533,6 +533,7 @@
 .hero-content {
   order: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -558,7 +559,50 @@
   justify-content: center;
 }
 
-@media (max-width: 600px) {
+/* Side-by-side layout for larger screens */
+@media (min-width: 768px) {
+  .hero-main {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(32px, 5vw, 72px);
+  }
+
+  .hero-portrait {
+    order: 0;
+    flex: 0 1 38%;
+    width: 38%;
+    max-width: 390px;
+    margin: 0;
+  }
+
+  .hero-content {
+    order: 1;
+    align-items: flex-start;
+    width: auto;
+    padding: 28px 0;
+    text-align: left;
+  }
+
+  .hero-eyebrow {
+    justify-content: flex-start;
+    margin-bottom: clamp(20px, 3vh, 32px);
+  }
+
+  .hero-title-line {
+    margin-inline: 0;
+  }
+
+  .hero-description {
+    margin-inline: 0;
+  }
+
+  .hero-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* Stacked layout for mobile */
+@media (max-width: 767px) {
   .hero {
     padding-top: 108px;
     padding-bottom: 22px;
@@ -567,6 +611,10 @@
   .hero-portrait {
     width: min(100%, 320px);
     max-width: 320px;
+  }
+
+  .hero-content {
+    padding: 0 0 24px;
   }
 
   .hero-title {
@@ -580,6 +628,7 @@
   }
 
   .hero-actions {
+    justify-content: center;
     gap: 16px;
   }
 }
