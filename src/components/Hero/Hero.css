@@ -639,3 +639,9 @@
     display: none;
   }
 }
+
+/* Remove the purple glow behind the hero portrait */
+.hero-portrait::before {
+  content: none !important;
+  display: none !important;
+}
