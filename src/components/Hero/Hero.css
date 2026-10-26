@@ -632,3 +632,10 @@
     gap: 16px;
   }
 }
+
+/* Hide the hero eyebrow on mobile only */
+@media (max-width: 767px) {
+  .hero-eyebrow {
+    display: none;
+  }
+}
