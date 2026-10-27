@@ -1,91 +1,94 @@
-import { useLayoutEffect, useRef } from 'react'
-import {
-  ArrowUpRight,
-  BrainCircuit,
-  GraduationCap,
-  Leaf,
-  Trophy,
-  Wallet,
-} from 'lucide-react'
+import { useEffect, useRef } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './Work.css'
+
+import pay4loImage from '../../assets/pay4lo.png'
+import nexaImage from '../../assets/nexa.png'
+import lifixImage from '../../assets/lifix.png'
+import riziqImage from '../../assets/riziq.png'
+import novaImage from '../../assets/nova.png'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const projects = [
   {
-    name: 'Pay4LO',
-    type: 'Fintech',
-    description: 'Everyday payments, travel, and smarter money experiences.',
-    url: 'https://fourontpay.onrender.com',
-    icon: Wallet,
-    slug: 'pay4lo',
     number: '01',
-    discipline: 'FINANCIAL TECHNOLOGY',
+    name: 'Pay4LO',
+    category: 'FINTECH',
+    description:
+      'A connected financial platform for payments, money management, and everyday digital services.',
+    image: pay4loImage,
+    url: 'https://fourontpay.onrender.com',
   },
   {
-    name: 'Nexa',
-    type: 'Student Platform',
-    description: 'A connected digital experience built around student life.',
-    url: 'https://nexa-app-if5e.onrender.com',
-    icon: GraduationCap,
-    slug: 'nexa',
     number: '02',
-    discipline: 'EDUCATION',
+    name: 'Nexa',
+    category: 'EDTECH',
+    description:
+      'A digital experience bringing student life, learning, and useful resources together.',
+    image: nexaImage,
+    url: 'https://nexa-app-if5e.onrender.com',
   },
   {
-    name: 'LiFix',
-    type: 'Lifestyle Platform',
-    description: 'Convenient access to everyday services in one place.',
-    url: 'https://lifix-app.onrender.com',
-    icon: Leaf,
-    slug: 'lifix',
     number: '03',
-    discipline: 'LIFESTYLE',
+    name: 'LiFix',
+    category: 'SERVICES',
+    description:
+      'A service-focused platform designed to make everyday needs easier to discover and manage.',
+    image: lifixImage,
+    url: 'https://lifix-app.onrender.com',
   },
   {
-    name: 'RizIQ',
-    type: 'Quiz Platform',
-    description: 'A quiz and competition experience designed for learning.',
-    url: 'https://riziq-app.onrender.com',
-    icon: Trophy,
-    slug: 'riziq',
     number: '04',
-    discipline: 'LEARNING & PLAY',
+    name: 'RizIQ',
+    category: 'INTERACTIVE LEARNING',
+    description:
+      'An engaging learning experience combining knowledge, challenges, and competition.',
+    image: riziqImage,
+    url: 'https://riziq-app.onrender.com',
   },
   {
-    name: 'Nova',
-    type: 'AI Assistant',
-    description: 'A conversational assistant concept for more intuitive workflows.',
-    url: '#contact',
-    icon: BrainCircuit,
-    slug: 'nova',
     number: '05',
-    discipline: 'ARTIFICIAL INTELLIGENCE',
+    name: 'Nova',
+    category: 'ARTIFICIAL INTELLIGENCE',
+    description:
+      'A conversational AI experience built to help people explore ideas and get things done.',
+    image: novaImage,
+    url: 'https://nova-ai-pg8q.onrender.com/',
   },
 ]
 
 function Work() {
   const workRef = useRef(null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const context = gsap.context(() => {
-      gsap.from('.work-kicker, .work-intro', {
-        y: 22,
+      gsap.from('.work-heading > *', {
+        y: 24,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: undefined,
-        immediateRender: false,
-      })
-
-      gsap.from('.project-tile', {
-        y: 28,
-        opacity: 0,
-        duration: 0.75,
         stagger: 0.1,
         ease: 'power3.out',
-        delay: 0.12,
-        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: '.work-heading',
+          start: 'top 85%',
+          once: true,
+        },
+      })
+
+      gsap.from('.project-item', {
+        y: 24,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.work-grid',
+          start: 'top 85%',
+          once: true,
+        },
       })
     }, workRef)
 
@@ -93,78 +96,85 @@ function Work() {
   }, [])
 
   return (
-    <section ref={workRef} id="work" className="work-section">
-      <div className="work-inner">
-        <div className="work-heading">
-          <div className="work-intro">
-            <span className="work-kicker">
-              <span className="work-kicker-dot" />
-              01 / SELECTED WORK
-            </span>
-            <h2>Things I've <span>built.</span></h2>
-            <p>
-              A selection of products and ideas shaped through design,
-              engineering, and a lot of curiosity.
+    <section className="work-section" id="work" ref={workRef}>
+      <div className="work-container">
+        <header className="work-heading">
+          <p className="work-kicker">SELECTED WORK / 2024—2026</p>
+
+          <div className="work-heading-row">
+            <h2>
+              Things I’ve
+              <br />
+              <span>built.</span>
+            </h2>
+
+            <p className="work-intro">
+              A selection of digital products shaped by curiosity,
+              thoughtful design, and the desire to make useful things
+              work beautifully.
             </p>
           </div>
 
-          <span className="work-count">
-            <strong>05</strong>
-            <span>PROJECTS<br />AND COUNTING</span>
-          </span>
-        </div>
+          <div className="work-heading-bottom">
+            <span>INDEPENDENT PROJECTS</span>
+            <span>05 PROJECTS</span>
+          </div>
+        </header>
 
-        <div className="project-grid">
-          {projects.map((project) => {
-            const ProjectIcon = project.icon
-            const external = project.url.startsWith('http')
-
-            return (
+        <div className="work-grid">
+          {projects.map((project) => (
+            <article className="project-item" key={project.name}>
               <a
-                key={project.slug}
-                className={`project-tile project-tile--${project.slug}`}
+                className="project-image"
                 href={project.url}
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noreferrer' : undefined}
-                aria-label={`Explore ${project.name}, ${project.type}`}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Visit ${project.name}`}
               >
-                <div className="project-tile-top">
-                  <span className="project-number">{project.number}</span>
-                  <span className="project-discipline">{project.discipline}</span>
-                  <span className="project-open">
-                    <ArrowUpRight size={17} strokeWidth={1.6} />
-                  </span>
-                </div>
+                <img
+                  src={project.image}
+                  alt={`${project.name} project preview`}
+                  loading="lazy"
+                />
 
-                <div className="project-art">
-                  <div className="project-art-orbit project-art-orbit--outer" />
-                  <div className="project-art-orbit project-art-orbit--inner" />
-                  <div className="project-art-glow" />
-                  <div className="project-art-icon">
-                    <ProjectIcon size={38} strokeWidth={1.35} />
-                  </div>
-                  <span className="project-art-wordmark">{project.name}</span>
-                </div>
-
-                <div className="project-tile-bottom">
-                  <div>
-                    <h3>{project.name}</h3>
-                    <span className="project-type">{project.type}</span>
-                  </div>
-                  <p>{project.description}</p>
-                </div>
+                <span className="project-open">
+                  <ArrowUpRight size={18} strokeWidth={1.7} />
+                </span>
               </a>
-            )
-          })}
+
+              <div className="project-details">
+                <div className="project-overline">
+                  <span>{project.number}</span>
+                  <span>{project.category}</span>
+                </div>
+
+                <div className="project-title-row">
+                  <h3>{project.name}</h3>
+
+                  <a
+                    className="project-visit"
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${project.name} website`}
+                  >
+                    <ArrowUpRight size={19} strokeWidth={1.6} />
+                  </a>
+                </div>
+
+                <p>{project.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
 
-        <div className="work-footer">
-          <span>DESIGNED WITH INTENTION. BUILT TO BE USEFUL.</span>
+        <footer className="work-footer">
+          <p>GOOD THINGS HAPPEN WHEN THE RIGHT MINDS CONNECT.</p>
           <a href="#contact">
-            Have a project in mind?
-            <ArrowUpRight size={14} />
+            Have an idea worth building? Let’s make it real.
+            <ArrowUpRight size={17} strokeWidth={1.6} />
           </a>
-        </div>
+        </footer>
       </div>
     </section>
   )

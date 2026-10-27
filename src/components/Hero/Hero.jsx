@@ -9,29 +9,57 @@ function Hero() {
 
   useLayoutEffect(() => {
     const hero = heroRef.current
+
     if (!hero) return
 
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
+    if (prefersReducedMotion) return
+
     const context = gsap.context(() => {
-      gsap.timeline({
-        defaults: { ease: 'power3.out' },
+      const timeline = gsap.timeline({
+        defaults: {
+          ease: 'power3.out',
+        },
       })
-        .from('.hero-eyebrow', {
-          y: 16,
+
+      timeline
+        .from('.hero-portrait-image', {
           opacity: 0,
-          duration: 0.55,
+          y: 18,
+          duration: 0.8,
         })
-        .from('.hero-title-line', {
-          y: 35,
-          opacity: 0,
-          duration: 0.75,
-          stagger: 0.12,
-        }, '-=0.2')
-        .from('.hero-description, .hero-actions, .hero-portrait, .hero-bottom', {
-          y: 14,
-          opacity: 0,
-          duration: 0.55,
-          stagger: 0.08,
-        }, '-=0.3')
+        .from(
+          '.hero-eyebrow',
+          {
+            opacity: 0,
+            y: 12,
+            duration: 0.4,
+          },
+          '-=0.5'
+        )
+        .from(
+          '.hero-title-line',
+          {
+            opacity: 0,
+            y: 22,
+            duration: 0.6,
+            stagger: 0.09,
+          },
+          '-=0.2'
+        )
+        .from(
+          '.hero-description, .hero-actions, .hero-capabilities, .hero-bottom',
+          {
+            opacity: 0,
+            y: 10,
+            duration: 0.4,
+            stagger: 0.06,
+          },
+          '-=0.25'
+        )
     }, hero)
 
     return () => context.revert()
@@ -39,25 +67,37 @@ function Hero() {
 
   return (
     <section ref={heroRef} className="hero" id="home">
-      <div className="hero-object" aria-hidden="true" />
-
       <div className="hero-main">
+        <div className="hero-portrait">
+          <div className="hero-portrait-frame">
+            <img
+              className="hero-portrait-image"
+              src={heroImage}
+              alt="Portrait of Muhammed Ibrahim Inyass"
+              fetchPriority="high"
+            />
+          </div>
+        </div>
+
         <div className="hero-content">
           <p className="hero-eyebrow">
             <span className="hero-status-dot" />
-            PRODUCT DESIGNER <span>·</span> BUILDER
+            TECHNOLOGY · OPERATIONS · LEADERSHIP
           </p>
 
           <h1 className="hero-title">
-            <span className="hero-title-line">I design and build</span>
+            <span className="hero-title-line">Building useful</span>
+            <span className="hero-title-line">digital experiences</span>
             <span className="hero-title-line hero-title-accent">
-              digital products<span className="hero-period">.</span>
+              with purpose<span className="hero-period">.</span>
             </span>
           </h1>
 
           <p className="hero-description">
-            Thoughtful design. Useful technology. Digital experiences
-            built with purpose and attention to detail.
+            I’m Ibrahim Inyass, a technology-focused professional combining
+            frontend development with experience in education, business
+            operations, and team coordination. I enjoy turning ideas into
+            practical digital experiences that solve real problems.
           </p>
 
           <div className="hero-actions">
@@ -67,28 +107,29 @@ function Hero() {
             </a>
 
             <a className="secondary-action" href="#contact">
-              Let’s talk
+              Let’s connect
             </a>
           </div>
-        </div>
 
-        <div className="hero-portrait">
-          <div className="hero-portrait-frame">
-            <img
-              className="hero-portrait-image"
-              src={heroImage}
-              alt="Portrait of Ibrahim Inyass"
-              fetchPriority="high"
-            />
+          <div className="hero-capabilities">
+            <span className="hero-capabilities-label">AREAS OF EXPERIENCE</span>
+
+            <div className="hero-capabilities-list">
+              <span>Frontend development</span>
+              <span>Business operations</span>
+              <span>Education & leadership</span>
+            </div>
           </div>
-          <span className="hero-portrait-caption">DESIGN · PRODUCT · ENGINEERING</span>
         </div>
       </div>
 
       <div className="hero-bottom">
-        <span className="hero-location">NIGERIA · 2026</span>
+        <span className="hero-location">ABUJA, NIGERIA</span>
+        <span className="hero-bottom-note">
+          REACT · JAVASCRIPT · API INTEGRATION
+        </span>
         <a className="hero-scroll" href="#work">
-          SCROLL TO EXPLORE
+          EXPLORE PROJECTS
           <ArrowDown size={14} strokeWidth={1.5} />
         </a>
       </div>
