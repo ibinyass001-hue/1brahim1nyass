@@ -24,6 +24,15 @@ const projects = [
   },
   {
     number: '02',
+    name: 'Nova',
+    category: 'ARTIFICIAL INTELLIGENCE',
+    description:
+      'A conversational AI experience built to help people explore ideas and get things done.',
+    image: novaImage,
+    url: 'https://nova-ai-pg8q.onrender.com/',
+  },
+  {
+    number: '03',
     name: 'Nexa',
     category: 'EDTECH',
     description:
@@ -32,7 +41,7 @@ const projects = [
     url: 'https://nexa-app-if5e.onrender.com',
   },
   {
-    number: '03',
+    number: '04',
     name: 'LiFix',
     category: 'SERVICES',
     description:
@@ -41,22 +50,13 @@ const projects = [
     url: 'https://lifix-app.onrender.com',
   },
   {
-    number: '04',
+    number: '05',
     name: 'RizIQ',
     category: 'INTERACTIVE LEARNING',
     description:
       'An engaging learning experience combining knowledge, challenges, and competition.',
     image: riziqImage,
     url: 'https://riziq-app.onrender.com',
-  },
-  {
-    number: '05',
-    name: 'Nova',
-    category: 'ARTIFICIAL INTELLIGENCE',
-    description:
-      'A conversational AI experience built to help people explore ideas and get things done.',
-    image: novaImage,
-    url: 'https://nova-ai-pg8q.onrender.com/',
   },
 ]
 
@@ -79,10 +79,10 @@ function Work() {
       })
 
       gsap.from('.project-item', {
-        y: 24,
+        y: 28,
         opacity: 0,
-        duration: 0.7,
-        stagger: 0.1,
+        duration: 0.8,
+        stagger: 0.12,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.work-grid',
@@ -137,8 +137,8 @@ function Work() {
                   loading="lazy"
                 />
 
-                <span className="project-open">
-                  <ArrowUpRight size={18} strokeWidth={1.7} />
+                <span className="project-open" aria-hidden="true">
+                  <ArrowUpRight size={19} strokeWidth={1.6} />
                 </span>
               </a>
 
@@ -158,11 +158,21 @@ function Work() {
                     rel="noreferrer"
                     aria-label={`Open ${project.name} website`}
                   >
-                    <ArrowUpRight size={19} strokeWidth={1.6} />
+                    <ArrowUpRight size={20} strokeWidth={1.5} />
                   </a>
                 </div>
 
                 <p>{project.description}</p>
+
+                <a
+                  className="project-text-link"
+                  href={project.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Explore project
+                  <ArrowUpRight size={15} strokeWidth={1.6} />
+                </a>
               </div>
             </article>
           ))}
@@ -170,6 +180,7 @@ function Work() {
 
         <footer className="work-footer">
           <p>GOOD THINGS HAPPEN WHEN THE RIGHT MINDS CONNECT.</p>
+
           <a href="#contact">
             Have an idea worth building? Let’s make it real.
             <ArrowUpRight size={17} strokeWidth={1.6} />
